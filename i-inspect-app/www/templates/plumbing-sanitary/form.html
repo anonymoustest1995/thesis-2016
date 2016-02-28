@@ -1,0 +1,129 @@
+<ion-view view-title="Plumbing or Sanitary Inspection">
+<ion-content class="padding">
+  <!-- Plumbing or Sanitary Form -->
+    <form role="form" name="plumbingSanitaryForm" ng-submit="addPlumbingSanitaryReport(plumbingSanitaryForm)">
+
+     <div class="list" ng-repeat="x in plumbing_or_sanitary">
+        <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
+          <span class="item">{{x.building_permit_number}}</span>
+        <div class="item item-divider"><strong>Customer Name</strong></div> 
+          <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+            <input type="hidden" ng-model="formData.plumbingSanitaryForm_id">
+            <input type="hidden" ng-model="formData.plumbing_or_sanitary_building_permit_number_link" readonly>
+
+          <div class="item item-divider"><strong>Inspection Type</strong></div>
+            <div class="item">
+                <input type="text" name="inspection_type" ng-model="formData.inspection_type" required/>
+            </div>
+
+          <div class="item item-divider"><strong>Scope of Work</strong></div>
+            <div class="item">
+                <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
+            </div>
+
+          <div class="item item-divider"><strong>Fixtures to be Installed</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="fixt" ng-model="formData.fixtures_to_be_installed" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.fixt.$error.required && plumbingSanitaryForm.fixt.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Status <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="text" name="stat" ng-model="formData.status" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.stat.$error.required && plumbingSanitaryForm.stat.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Quantity <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="number" name="quantity" ng-model="formData.quantity" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.quantity.$error.required && plumbingSanitaryForm.quantity.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Water Supply <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="text"  name="wat" ng-model="formData.water_supply" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.wat.$error.required && plumbingSanitaryForm.wat.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>System of Disposal <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="text"  name="sys" ng-model="formData.system_of_disposal" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.sys.$error.required && plumbingSanitaryForm.sys.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Number of Stories of Building <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="number" name="no"  ng-model="formData.number_of_stories" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.no.$error.required && plumbingSanitaryForm.no.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Proposed Date of Installation <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="date" name="pro"  ng-model="formData.date_installed" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.pro.$error.required && plumbingSanitaryForm.pro.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Estimated Date of Completion <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="date" name="est" ng-model="formData.date_completion" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.est.$error.required && plumbingSanitaryForm.est.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Total Area of the Building (sq. m) <span class="asterisk">*</span></strong></div>
+            <div class="item">
+                <input type="text" name="tot" ng-model="formData.total_area" required>
+            </div>
+            <span ng-show="plumbingSanitaryForm.tot.$error.required && plumbingSanitaryForm.tot.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+          
+           <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
+            <div class="item">
+              <span>(Please write "none" if not applicable)</span>
+              <input type="text" name="others" ng-model="formData.others" required/>
+            </div>
+
+            <span ng-show="plumbingSanitaryForm.others.$error.required && plumbingSanitaryForm.others.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+              <span>&#8369;</span>
+                <input type="number" step="any" name="payment" ng-model="formData.payment" required/>
+            </div>
+            <!-- show an error if field is empty -->
+                <span ng-show="plumbingSanitaryForm.payment.$error.required && plumbingSanitaryForm.payment.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+                <span class="asterisk" ng-show="plumbingSanitaryForm.payment.$error.number">
+                Not valid Amount!</span>
+     
+            <div class="item item-divider"><strong>Feedbacks / Observations  <span class="asterisk">*</span></strong></div>
+                <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
+            <!-- show an error if Feedbacks or Observations field is empty -->
+                <span ng-show="plumbingSanitaryForm.feedbacks.$error.required && plumbingSanitaryForm.feedbacks.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+               <label class="item item-input item-select">
+                <div class="input-label">
+                  <strong>Remarks</strong>
+                </div>
+                <select name="plumbing_or_sanitary_remarks" ng-model="formData.remarks" required>
+                  <option value="Passed" selected>Passed</option>
+                  <option value="Require As-Built Plan">Require As-Built Plan</option>
+                </select>
+              </label>
+
+        <button type="submit" class="button button-block button-positive" ng-disabled="!plumbingSanitaryForm.$valid">Submit</button>
+    </div>
+  </form>
+  </ion-content>
+</ion-view>
+        

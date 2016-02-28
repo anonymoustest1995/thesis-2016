@@ -1,0 +1,65 @@
+
+<ion-view view-title="Start Inspection">
+<ion-content class="padding">
+  <!-- Architectural Form -->
+    <form role="form" name="othersForm" ng-submit="addOthersReport(othersForm)">
+
+     <div class="list" ng-repeat="x in others">
+        <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
+          <span class="item">{{x.building_permit_number}}</span>
+        <div class="item item-divider"><strong>Customer Name</strong></div> 
+          <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+            
+            <input type="hidden" ng-model="formData.inspection_id">
+            <input type="hidden" ng-model="formData.assigned_id_link">
+            <input type="hidden"  ng-model="formData.others"/>
+
+          <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="othersForm.scope_of_work.$error.required && othersForm.scope_of_work.$dirty" class="valid-add">
+            Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Inspection Type</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="inspection_type" ng-model="formData.inspection_type"/>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="othersForm.inspection_type.$error.required && othersForm.inspection_type.$dirty" class="valid-add">
+            Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
+             <span>&#8369;</span>
+                <input type="number" step="any"  ng-model="formData.payment" required>
+            </div>
+            <!-- show an error if field is empty -->
+            <span class="asterisk" ng-show="othersForm.payment.$error.required && othersForm.payment.$dirty" class="valid-add">
+                Please fill in the required field.</span>
+            <span class="asterisk" ng-show="othersForm.payment.$error.number">
+                Not valid Amount!</span>
+
+
+            <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
+                <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
+            <!-- show an error if Feedbacks or Observations field is empty -->
+                <span ng-show="othersForm.feedbacks.$error.required && othersForm.feedbacks.$dirty" class="valid-add">
+                Please fill in the required field.</span>
+
+               <label class="item item-input item-select">
+                <div class="input-label">
+                  <strong>Remarks</strong>&nbsp;<span class="asterisk">*</span>
+                </div>
+                <select name="architectural_remarks" ng-model="formData.remarks" required>
+                  <option value="Passed" selected>Passed</option>
+                  <option value="Require As-Built Plan">Require As-Built Plan</option>
+                </select>
+              </label>
+
+        <button type="submit" class="button button-block button-positive" ng-disabled="!othersForm.$valid">Submit</button>
+    </div>
+  </form>
+  </ion-content>
+</ion-view>
+        

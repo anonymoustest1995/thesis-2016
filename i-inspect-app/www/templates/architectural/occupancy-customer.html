@@ -1,0 +1,48 @@
+<ion-view view-title="Customer Information">
+    <ion-content class="padding">
+        <div class="list" ng-repeat="x in customer_data">
+            <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
+            <span class="item">{{x.building_permit_number}}</span>
+            <div class="item item-divider"><strong>Customer Name</strong></div> 
+            <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+            <div class="item item-divider"><strong>Occupancy Type</strong></div> 
+            <span class="item">{{x.occupancy_type_description}}</span>
+
+            <div class="item item-divider"><strong>TIN</strong></div> 
+                <span class="item">{{x.customer_tin_no}}</span>
+
+            <div class="item item-divider"><strong>Form of Ownership</strong></div> 
+                <span class="item">{{x.customer_form_of_ownership}}</span>
+
+            <div class="item item-divider"><strong>Contact Number</strong></div> 
+                <span class="item">{{x.customer_tel_no}}</span>
+
+            <div class="item item-divider"><strong>Form of Ownership</strong></div> 
+                <span class="item">{{x.customer_form_of_ownership}}</span>
+
+            <div class="item item-divider"><strong>Occupancy Description</strong></div> 
+                <span class="item">{{x.occupancy_type_description}}</span>
+
+            <div class="item item-divider"><strong>Address</strong></div> 
+                <span class="item">
+                  {{x.customer_address_no}}
+                  {{x.customer_address_street}}
+                  {{x.customer_address_barangay}}
+                  {{x.customer_address_city_or_municipality}}
+                </span>
+          
+            <div class="item item-divider"><strong>Construction Address</strong></div>
+                <span class="item">
+                  {{x.customer_location_address_no}}
+                  {{x.customer_location_address_street}}
+                  {{x.customer_location_address_barangay}}
+                  {{x.customer_location_address_city_or_municipality}}
+                </span>
+
+            <a href="#/architectural/form/{{x.assigned_id}}"> 
+                <button class="button button-full button-positive"> Proceed Anyway </button>
+            </a>
+
+        </div>
+    </ion-content>
+</ion-view>

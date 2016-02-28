@@ -1,0 +1,120 @@
+<ion-view view-title="Structural Inspection">
+<ion-content class="padding">
+  <!-- Structural Form -->
+    <form role="form" name="structuralForm" ng-submit="addStructuralReport(structuralForm)">
+
+     <div class="list" ng-repeat="x in structural">
+        <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
+          <span class="item">{{x.building_permit_number}}</span>
+        <div class="item item-divider"><strong>Customer Name</strong></div> 
+          <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+            <input type="hidden" ng-model="formData.structural_id">
+            <input type="hidden" ng-model="formData.structural_building_permit_number_link" readonly>
+        
+
+         <div class="item item-divider"><strong>Inspection Type</strong></div>
+                    <div class="item">
+                        <input type="text" name="inspection_type" ng-model="formData.inspection_type" required/>
+                    </div>
+
+        <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
+            </div>
+
+            <div class="item item-divider"><strong>Footing Size (meters)</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="footing_size"  ng-model="formData.footing_size" required>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.footing_size.$error.required && structuralForm.footing_size.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Column Size (meters)</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="column_size"  ng-model="formData.column_size" required>
+            </div>
+
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.column_size.$error.required && structuralForm.column_size.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Main Rebars Size (diameter)</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="main_rebars_size"  ng-model="formData.main_rebars_size" required>
+            </div>
+
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.main_rebars_size.$error.required && structuralForm.main_rebars_size.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+            <div class="item item-divider"><strong>Actual Seatback Measurements (meters)</strong></div>
+            <div class="item">
+                Front: <span class="asterisk">*</span><input type="text"  name="front" ng-model="formData.front_seatback" required>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.front.$error.required && structuralForm.front.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+            <div class="item">
+                Left Side: <span class="asterisk">*</span><input type="text"  name="left" ng-model="formData.left_side_seatback" required>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.left.$error.required && structuralForm.left.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+            <div class="item">
+                Right Side: <span class="asterisk">*</span><input type="text" name="right" ng-model="formData.right_side_seatback" required>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.right.$error.required && structuralForm.right.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+            <div class="item">
+                Rear: <span class="asterisk">*</span><input type="text" name="rear"  ng-model="formData.rear_seatback" required>
+            </div>
+            <!-- show an error if field is empty -->
+            <span ng-show="structuralForm.rear.$error.required && structuralForm.rear.$dirty" class="asterisk">
+            Please fill in the required field.</span>
+
+             <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
+            <div class="item">
+              <span>(Please write "none" if not applicable)</span>
+              <input type="text" name="others" ng-model="formData.others" required/>
+            </div>
+            <span ng-show="structuralForm.others.$error.required && structuralForm.others.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+             <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+             <span>&#8369;</span>
+                <input type="number" step="any" name="payment" ng-model="formData.payment" required/>
+            </div>
+            <!-- show an error if field is empty -->
+                <span ng-show="structuralForm.payment.$error.required && structuralForm.payment.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+                <span class="asterisk" ng-show="structuralForm.payment.$error.number">
+                Not valid Amount!</span>
+
+            <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
+                <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
+            <!-- show an error if Feedbacks or Observations field is empty -->
+                <span ng-show="structuralForm.feedbacks.$error.required && structuralForm.feedbacks.$dirty" class="asterisk">
+                Please fill in the required field.</span>
+
+               <label class="item item-input item-select">
+                <div class="input-label">
+                  <strong>Remarks</strong> &nbsp; <span class="asterisk">*</span>
+                </div>
+                <select name="structural_remarks" ng-model="formData.remarks" required>
+                  <option value="Passed" selected>Passed</option>
+                  <option value="Require As-Built Plan">Require As-Built Plan</option>
+                </select>
+              </label>
+
+        <button type="submit" class="button button-block button-positive" ng-disabled="!structuralForm.$valid">Submit</button>
+    </div>
+  </form>
+  </ion-content>
+</ion-view>
+        

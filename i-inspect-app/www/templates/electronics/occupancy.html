@@ -1,0 +1,13 @@
+<ion-view view-title="Occupancy Inspection">
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"> </ion-refresher>
+        <ion-md-input id="searh-btn" placeholder="Search" ng-model="building_permit" highlight-color="balanced"></ion-md-input>
+        <div class="list">
+            <div class="item item-divider"><strong>Select Building Permit Number</strong></div> 
+            <ion-item ng-repeat="item in items | filter:building_permit" class="bnum item-icon-right" type="item-text-wrap" href="#/electronics/occupancy-customer/{{item.assigned_id}}">
+                {{item.building_permit_number}}
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-view>

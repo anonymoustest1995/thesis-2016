@@ -1,0 +1,41 @@
+
+                    <?php foreach ($data as $person) : ?>
+                      <?php echo $person; ?>
+                    <?php endforeach; ?> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

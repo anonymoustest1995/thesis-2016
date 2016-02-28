@@ -1,0 +1,84 @@
+<ion-view view-title="Electronics Inspection">
+<ion-content class="padding">
+  <!-- Electronics Form -->
+    <form role="form" name="electronicsForm" ng-submit="addElectronicsReport(electronicsForm)">
+
+     <div class="list" ng-repeat="x in electronics">
+        <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
+          <span class="item">{{x.building_permit_number}}</span>
+        <div class="item item-divider"><strong>Customer Name</strong></div> 
+          <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+            <input type="hidden" ng-model="formData.inspection_id">
+            <input type="hidden" ng-model="formData.assigned_id_link">
+
+        <div class="item item-divider"><strong>Inspection Type</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="inspection_type" ng-model="formData.inspection_type" required/>
+            </div>
+            <!-- show an error if field is empty -->
+            <span class="asterisk" ng-show="electronicsForm.inspection_type.$error.required && electronicsForm.inspection_type.$dirty" class="valid-add">
+            Please fill in the required field.</span>
+
+
+        <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
+            <div class="item">
+                <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
+            </div>
+            
+            <!-- show an error if field is empty -->
+            <span class="asterisk" ng-show="electronicsForm.scope_of_work.$error.required && electronicsForm.scope_of_work.$dirty" class="valid-add">
+            Please fill in the required field.</span>
+
+
+           <div class="item item-divider"><strong>Installation Operation Description</strong> <span class="asterisk">*</span></div>
+            <div class="item" ng-repeat="role in installation_operation_description">
+                <ion-checkbox type="checkbox" checklist-model="formData.installation_operation_description" checklist-value="role">
+                  {{ role }}
+               </ion-checkbox>
+            </div>
+
+          <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
+            <div class="item">
+              <span>(Please write "none" if not applicable)</span>
+              <input type="text" name="others" ng-model="formData.others" required/>
+            </div>
+
+             <!-- show an error if  field is empty -->
+            <span class="asterisk" ng-show="electronicsForm.others.$error.required && electronicsForm.others.$dirty" class="valid-add">
+                Please fill in the required field.</span>
+
+          <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
+             <div class="item">
+              <span>&#8369;</span>
+              <input type="number" step="any" name="payment"  ng-model="formData.payment" required/>
+              </div>
+              <!-- show an error if  Feedbacks or Observations field is empty -->
+              <span class="asterisk" ng-show="electronicsForm.payment.$error.required && electronicsForm.payment.$dirty" class="valid-add">
+                Please fill in the required field.</span> 
+              <span class="asterisk" ng-show="electronicsForm.payment.$error.number">
+                Not valid Amount!</span>
+
+
+            <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
+                <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
+
+            <!-- show an error if Feedbacks or Observations field is empty -->
+            <span class="asterisk" ng-show="electronicsForm.feedbacks.$error.required && electronicsForm.feedbacks.$dirty" class="valid-add">
+                Please fill in the required field.</span>
+
+               <label class="item item-input item-select">
+                <div class="input-label">
+                  <strong>Remarks</strong> &nbsp; <span class="asterisk">*</span>
+                </div>
+                <select name="remarks" ng-model="formData.remarks" required>
+                  <option value="Passed" selected>Passed</option>
+                  <option value="Require As-Built Plan">Require As-Built Plan</option>
+                </select>
+              </label>
+
+        <button type="submit" class="button button-block button-positive" ng-disabled="!electronicsForm.$valid">Submit</button>
+    </div>
+  </form>
+  </ion-content>
+</ion-view>
+        
