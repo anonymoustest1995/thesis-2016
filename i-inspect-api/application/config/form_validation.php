@@ -12,10 +12,6 @@ $config = array(
     ),
 
     'user-update' => array(
-		array('field' => "user_email", 'label'  => "Email", 'rules' => "required|valid_email"),
-		array('field' => "user_lastname", 'label'  => "Lastname", 'rules'  => "required|trim|alpha|min_length[2]|max_length[25]"),
-	    array('field' => "user_firstname", 'label'  => "Firstname", 'rules'  => "required|trim|alpha|min_length[2]|max_length[25]"),
-       	array('field' => "user_middlename", 'label'  => "Middlename", 'rules'  => "required|trim|alpha|min_length[2]|max_length[25]"),
 		array('field' => "user_password", 'label'  => "Password", 'rules'  => "required|trim|min_length[5]|max_length[25]"),
        	array('field' => "user_confirm_password", 'label'  => "Confirm Password", 'rules'  => "required|trim|matches[user_password]"),
     ),
@@ -24,8 +20,13 @@ $config = array(
       array('field' => "position_description", 'label'  => "Description", 'rules' => "required"),
     ),
 
-    'inspection_type' => array(
+    'inspection-type' => array(
       array('field' => "inspection_type_description", 'label'  => "Description", 'rules' => "required"),
+      array('field' => "position_description", 'label'  => "Position Description", 'rules' => "required"),
+    ),
+
+    'areas' => array(
+      array('field' => "area_description", 'label'  => "Area Description", 'rules' => "required"),
     ),
 
     

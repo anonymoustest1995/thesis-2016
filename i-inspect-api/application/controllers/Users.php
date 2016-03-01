@@ -73,8 +73,6 @@ class Users extends MY_Controller
        
     }  
 
-
-
     /*
     * Display's the Lists of Users
     */
@@ -128,13 +126,14 @@ class Users extends MY_Controller
         $records = $this->users_model->update($id);
         $pos = $this->users_model->get_user_position();
 
-        $this->load->view('user/update-user-form', 
-                    array(
+
+        $this->load->view('user/update-user-form',  array(
                         'title'  => 'Update User information',
                         'records'=> $records,
                         'userposition' => $pos,
-                    )
-                );
+                    ));
+        $this->load->view('layouts/update-footer');
+
     }
 
     /*
@@ -155,10 +154,6 @@ class Users extends MY_Controller
                     array(
                         'notification' => 'Validation error',
                         'error'        => array(
-                            'user_email'            => form_error('user_email'),
-                            'user_lastname'         => form_error('user_lastname'),
-                            'user_firstname'        => form_error('user_firstname'),
-                            'user_middlename'       => form_error('user_middlename'),
                             'user_password'         => form_error('user_password'),
                             'user_confirm_password' => form_error('user_confirm_password'),
                         )
@@ -167,20 +162,23 @@ class Users extends MY_Controller
             } else {
 
             $id   = $this->uri->segment(3);
-            $confirm = $this->users_model->save_update_user_data($id, 
+            $data = $this->users_model->save_update_user_data($id, 
                 array(
-                    'user_username'         => $this->input->post('user_username', TRUE),
-                    'user_email'            => $this->input->post('user_email', TRUE), 
-                    'user_lastname'         => ucfirst($this->input->post('user_lastname', TRUE)),
-                    'user_firstname'        => ucfirst($this->input->post('user_firstname', TRUE)),
-                    'user_middlename'       => ucfirst($this->input->post('user_middlename', TRUE)),
-                    'user_gender'           => $this->input->post('user_gender', TRUE),
-                    'user_password'         => $hashed_password,
-                    'user_position_link'    => $this->input->post('user_position', TRUE),
+                    'user_username'     => $this->input->post('user_username', TRUE),
+                    'user_email'        => $this->input->post('user_email', TRUE),
+                    'user_position_link' => $this->input->post('user_position_link', TRUE),
+                    'user_lastname'     => ucfirst($this->input->post('user_lastname', TRUE)),
+                    'user_firstname'    => ucfirst($this->input->post('user_firstname', TRUE)),
+                    'user_middlename'   => ucfirst($this->input->post('user_middlename', TRUE)),
+                    'user_gender'       => $this->input->post('user_gender', TRUE),
+                    'user_password'     => $hashed_password,
                     )
-            );
+        );
 
-            echo ($confirm) ? json_encode(array('notification' => 'Record Successfully Updated')) : json_encode(array('notification' => 'Failed Creation'));
+        $this->db->where('user_id', $id);
+        $this->db->update('tbl_users', $data);
+
+        echo ($confirm) ? json_encode(array('notification' => 'Record Successfully Updated')) : json_encode(array('notification' => 'Failed Creation'));
         }
     }
 
@@ -197,7 +195,7 @@ class Users extends MY_Controller
             $confirm = $this->hasher->authLogin($username, $password);
             if ($confirm) 
             {
-                if($this->session->userdata('user_position') != 'Administrator') 
+                if($this->session->userdata('user_position') != 'Super Admin' && $this->session->userdata('user_position') != 'Administrator') 
                 {
                     $this->load->view('layouts/login-header');
                         $this->load->view('auth/login',
@@ -207,11 +205,9 @@ class Users extends MY_Controller
                                 )
                             );
                         $this->load->view('layouts/login-footer');
+                }else {
+                    redirect('admin/dashboard');
                 }
-                elseif($this->session->userdata('user_position') == 'Administrator') {
-                    var_dump($this->session->all_userdata());
-                   redirect('admin/dashboard');
-                 }
             }
             else {
                 $this->load->view('layouts/login-header'
@@ -292,20 +288,6 @@ class Users extends MY_Controller
             return FALSE;
         }
 
-    }
-
-    /*
-    * Upload Image
-    */
-    public function save()
-    {
-        $this->do_upload();
-    }
-
-    public function do_upload()
-    {
-        if(is_uploaded_file($_FILES["pic"]["temp_name"]))
-            move_uploaded_file($_FILES["pic"]["temp_name"], "./assets/images/".$_FILES["pic"]["name"]);
     }
 
 

@@ -24,12 +24,22 @@
             <span ng-show="mechanicalForm.scope_of_work.$error.required && mechanicalForm.scope_of_work.$dirty" class="valid-add">
             Please fill in the required field.</span>
 
-          <div class="item item-divider"><strong>Installation Operation Description</strong> <span class="asterisk">*</span></div>
-            <div class="item" ng-repeat="role in mechanical_installation_operation_description">
-                <ion-checkbox type="checkbox" checklist-model="formData.mechanical_installation_operation_description" checklist-value="role">
-                  {{ role }}
+           <div class="item item-divider"><strong>Installation Operation Description</strong> <span class="asterisk">*</span></div>
+                <button class="button button-balanced" ng-click="checkAll()">
+                 Check All
+                </button>
+                <button class="button button-balanced" ng-click="uncheckAll()">
+                 UnCheck All
+                </button>
+            <div class="item" ng-repeat="role in roles">
+                <ion-checkbox type="checkbox" name="roles" data-checklist-model="user.roles" data-checklist-value="role" ng-required="user.roles.length==0">
+                  {{ role.area_description }}
                </ion-checkbox>
             </div>
+             <!-- show an error if field is empty -->
+            <span class="asterisk" ng-show="mechanicalForm.roles.$error.required && mechanicalForm.roles.$dirty">
+            Please fill in the required field.</span>
+
           
           <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
             <div class="item">
@@ -37,7 +47,7 @@
               <input type="text" name="others" ng-model="formData.others" required/>
             </div>
             <!-- show an error if field is empty -->
-            <span ng-show="mechanicalForm.others.$error.required" class="asterisk">
+            <span ng-show="mechanicalForm.others.$error.required && mechanicalForm.others.$dirty" class="asterisk">
             Please fill in the required field.</span>
 
           <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>

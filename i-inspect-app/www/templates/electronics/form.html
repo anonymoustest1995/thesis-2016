@@ -16,7 +16,7 @@
                 <input type="text" name="inspection_type" ng-model="formData.inspection_type" required/>
             </div>
             <!-- show an error if field is empty -->
-            <span class="asterisk" ng-show="electronicsForm.inspection_type.$error.required && electronicsForm.inspection_type.$dirty" class="valid-add">
+            <span class="asterisk" ng-show="electronicsForm.inspection_type.$error.required && electronicsForm.inspection_type.$dirty">
             Please fill in the required field.</span>
 
 
@@ -26,16 +26,26 @@
             </div>
             
             <!-- show an error if field is empty -->
-            <span class="asterisk" ng-show="electronicsForm.scope_of_work.$error.required && electronicsForm.scope_of_work.$dirty" class="valid-add">
+            <span class="asterisk" ng-show="electronicsForm.scope_of_work.$error.required && electronicsForm.scope_of_work.$dirty">
             Please fill in the required field.</span>
 
 
            <div class="item item-divider"><strong>Installation Operation Description</strong> <span class="asterisk">*</span></div>
-            <div class="item" ng-repeat="role in installation_operation_description">
-                <ion-checkbox type="checkbox" checklist-model="formData.installation_operation_description" checklist-value="role">
-                  {{ role }}
+                <button class="button button-balanced" ng-click="checkAll()">
+                 Check All
+                </button>
+                <button class="button button-balanced" ng-click="uncheckAll()">
+                 UnCheck All
+                </button>
+            <div class="item" ng-repeat="role in roles">
+                <ion-checkbox type="checkbox" name="roles" data-checklist-model="user.roles" data-checklist-value="role" ng-required="user.roles.length==0">
+                  {{ role.area_description }}
                </ion-checkbox>
             </div>
+             <!-- show an error if field is empty -->
+            <span class="asterisk" ng-show="electronicsForm.roles.$error.required && electronicsForm.roles.$dirty">
+            Please fill in the required field.</span>
+
 
           <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
             <div class="item">
@@ -44,7 +54,7 @@
             </div>
 
              <!-- show an error if  field is empty -->
-            <span class="asterisk" ng-show="electronicsForm.others.$error.required && electronicsForm.others.$dirty" class="valid-add">
+            <span class="asterisk" ng-show="electronicsForm.others.$error.required && electronicsForm.others.$dirty">
                 Please fill in the required field.</span>
 
           <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
@@ -53,7 +63,7 @@
               <input type="number" step="any" name="payment"  ng-model="formData.payment" required/>
               </div>
               <!-- show an error if  Feedbacks or Observations field is empty -->
-              <span class="asterisk" ng-show="electronicsForm.payment.$error.required && electronicsForm.payment.$dirty" class="valid-add">
+              <span class="asterisk" ng-show="electronicsForm.payment.$error.required && electronicsForm.payment.$dirty">
                 Please fill in the required field.</span> 
               <span class="asterisk" ng-show="electronicsForm.payment.$error.number">
                 Not valid Amount!</span>
@@ -63,7 +73,7 @@
                 <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
 
             <!-- show an error if Feedbacks or Observations field is empty -->
-            <span class="asterisk" ng-show="electronicsForm.feedbacks.$error.required && electronicsForm.feedbacks.$dirty" class="valid-add">
+            <span class="asterisk" ng-show="electronicsForm.feedbacks.$error.required && electronicsForm.feedbacks.$dirty">
                 Please fill in the required field.</span>
 
                <label class="item item-input item-select">

@@ -1,131 +1,109 @@
-
 <ion-view view-title="Electrical Inspection">
 <ion-content class="padding">
-  <!-- Electrical Form -->
-    <form role="form" name="electricalForm" ng-submit="addElectricalReport(electricalForm)">
-
-     <div class="list" ng-repeat="x in electrical">
+<!-- Electrical Form -->
+<form role="form" name="electricalForm" ng-submit="addElectricalReport(electricalForm)">
+    <div class="list" ng-repeat="x in electrical">
         <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
-          <span class="item">{{x.building_permit_number}}</span>
-        <div class="item item-divider"><strong>Customer Name</strong></div> 
-          <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
-            <input type="hidden" ng-model="formData.electrical_id">
-            <input type="hidden" ng-model="formData.electrical_building_permit_number_link" readonly>
-
+        <span class="item">{{x.building_permit_number}}</span>
+        <div class="item item-divider"><strong>Customer Name</strong></div>
+        <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+        <input type="hidden" ng-model="formData.electrical_id">
+        <input type="hidden" ng-model="formData.electrical_building_permit_number_link" readonly>
         
         <div class="item item-divider"><strong>Inspection Type</strong> <span class="asterisk">*</span></div>
-            <div class="item">
-                <input type="text" name="inspection_type" ng-model="formData.inspection_type"/>
-            </div>
-
-          <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
-            <div class="item">
-                <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
-            </div>
-            <!-- show an error if field is empty -->
-            <span class="asterisk" ng-show="electricalForm.electrical_scope_of_work.$error.required && electricalForm.electrical_scope_of_work.$dirty" class="valid-add">
-            Please fill in the required field.</span>
-
-          <div class="item item-divider"><strong>Number of Outlets</strong></div>
-            <div class="item">
-                Light: <span class="asterisk">*</span> <input type="number" name="light" ng-model="formData.number_of_light_outlet" required>
-            </div>
-            <span class="asterisk" ng-show="electricalForm.light.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-                Water Heater: <span class="asterisk">*</span> <input type="number" name="water" ng-model="formData.number_of_water_heater_outlet" required>
-            </div>
-            <span class="asterisk" ng-show="electricalForm.water.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-                Convenience: <span class="asterisk">*</span> <input type="number"name="con"  ng-model="formData.number_of_convenience_outlet" required>
-            </div>
-            <span class="asterisk" ng-show="electricalForm.con.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-                SPO, Aicon: <span class="asterisk">*</span> <input type="number" name="air" ng-model="formData.number_of_aircon_outlet" required>
-            </div>
-            <span class="asterisk" ng-show="electricalForm.air.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-               Cooking Unit: <span class="asterisk">*</span> <input type="number" name="cook" ng-model="formData.number_of_cooking_unit_outlet" required>
-            </div>
-            <span class="asterisk" ng-show="electricalForm.cook.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-                Water Pump: <span class="asterisk">*</span> <input type="number" name="pump" ng-model="formData.number_of_water_pump_outlet" required>
-            </div>
-            <span class="asterisk" ng-show="electricalForm.pump.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-          <div class="item item-divider"><strong>Number of Equipment / Writing Devicess</strong></div>
-            <div class="item">
-                Toggle Switch: <span class="asterisk">*</span> <input type="number" name="toggle" ng-model="formData.number_of_toggle_switch">
-            </div>
-            <span class="asterisk" ng-show="electricalForm.toggle.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-                Bells or Buzzers: <span class="asterisk">*</span> <input type="number" name="bells" ng-model="formData.number_of_bells_or_buzzers">
-            </div>
-            <span class="asterisk" ng-show="electricalForm.bells.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-                Push Buttons: <span class="asterisk">*</span> <input type="number" name="push" ng-model="formData.number_of_push_buttons">
-            </div>
-
-            <span class="asterisk" ng-show="electricalForm.push.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item">
-               FA Detectors: <span class="asterisk">*</span> <input type="number" name="fa" ng-model="formData.number_of_fa_detectors">
-            </div>
-
-            <span class="asterisk" ng-show="electricalForm.fa.$error.required" class="valid-add">
-            Please fill in the required field.</span>
-
-            <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
-              <div class="item">
-                <span>(Please write "none" if not applicable)</span>
-                <input type="text" name="others" ng-model="formData.others" required/>
-              </div>
-
-            <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
-            <div class="item">
+        <div class="item">
+            <input type="text" name="inspection_type" ng-model="formData.inspection_type"/>
+        </div>
+        <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
+        <div class="item">
+            <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
+        </div>
+        <!-- show an error if field is empty -->
+        <span class="asterisk" ng-show="electricalForm.electrical_scope_of_work.$error.required && electricalForm.electrical_scope_of_work.$dirty" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item item-divider"><strong>Number of Outlets</strong></div>
+        <div class="item">
+            Light: <span class="asterisk">*</span> <input type="number" name="light" ng-model="formData.number_of_light_outlet" required>
+        </div>
+        <span class="asterisk" ng-show="electricalForm.light.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            Water Heater: <span class="asterisk">*</span> <input type="number" name="water" ng-model="formData.number_of_water_heater_outlet" required>
+        </div>
+        <span class="asterisk" ng-show="electricalForm.water.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            Convenience: <span class="asterisk">*</span> <input type="number"name="con"  ng-model="formData.number_of_convenience_outlet" required>
+        </div>
+        <span class="asterisk" ng-show="electricalForm.con.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            SPO, Aicon: <span class="asterisk">*</span> <input type="number" name="air" ng-model="formData.number_of_aircon_outlet" required>
+        </div>
+        <span class="asterisk" ng-show="electricalForm.air.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            Cooking Unit: <span class="asterisk">*</span> <input type="number" name="cook" ng-model="formData.number_of_cooking_unit_outlet" required>
+        </div>
+        <span class="asterisk" ng-show="electricalForm.cook.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            Water Pump: <span class="asterisk">*</span> <input type="number" name="pump" ng-model="formData.number_of_water_pump_outlet" required>
+        </div>
+        <span class="asterisk" ng-show="electricalForm.pump.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item item-divider"><strong>Number of Equipment / Writing Devicess</strong></div>
+        <div class="item">
+            Toggle Switch: <span class="asterisk">*</span> <input type="number" name="toggle" ng-model="formData.number_of_toggle_switch">
+        </div>
+        <span class="asterisk" ng-show="electricalForm.toggle.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            Bells or Buzzers: <span class="asterisk">*</span> <input type="number" name="bells" ng-model="formData.number_of_bells_or_buzzers">
+        </div>
+        <span class="asterisk" ng-show="electricalForm.bells.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            Push Buttons: <span class="asterisk">*</span> <input type="number" name="push" ng-model="formData.number_of_push_buttons">
+        </div>
+        <span class="asterisk" ng-show="electricalForm.push.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item">
+            FA Detectors: <span class="asterisk">*</span> <input type="number" name="fa" ng-model="formData.number_of_fa_detectors">
+        </div>
+        <span class="asterisk" ng-show="electricalForm.fa.$error.required" class="valid-add">
+        Please fill in the required field.</span>
+        <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
+        <div class="item">
+            <span>(Please write "none" if not applicable)</span>
+            <input type="text" name="others" ng-model="formData.others" required/>
+        </div>
+        <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
+        <div class="item">
             <span>&#8369;</span>
-                <input type="number" step="any"  ng-model="formData.payment" required>
+            <input type="number" step="any"  ng-model="formData.payment" required>
+        </div>
+        <!-- show an error if  field is empty -->
+        <span class="asterisk" ng-show="electricalForm.payment.$error.required && electricalForm.payment.$dirty" class="valid-add">
+        Please fill in the required field.</span>
+        <span class="asterisk" ng-show="electricalForm.payment.$error.number">
+        Not valid Amount!</span>
+        <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
+        <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
+        <!-- show an error if Feedbacks or Observations field is empty -->
+        <span ng-show="electricalForm.electrical_feedbacks.$error.required && electricalForm.electrical_feedbacks.$dirty" class="valid-add">
+        Please fill in the required field.</span>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                <strong>Remarks</strong> <span class="asterisk">*</span>
             </div>
-              <!-- show an error if  field is empty -->
-            <span class="asterisk" ng-show="electricalForm.payment.$error.required && electricalForm.payment.$dirty" class="valid-add">
-                Please fill in the required field.</span>
-            <span class="asterisk" ng-show="electricalForm.payment.$error.number">
-                Not valid Amount!</span>
-
-            <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
-                <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
-            <!-- show an error if Feedbacks or Observations field is empty -->
-                <span ng-show="electricalForm.electrical_feedbacks.$error.required && electricalForm.electrical_feedbacks.$dirty" class="valid-add">
-                Please fill in the required field.</span>
-
-               <label class="item item-input item-select">
-                <div class="input-label">
-                  <strong>Remarks</strong> <span class="asterisk">*</span>
-                </div>
-                <select name="remarks" ng-model="formData.remarks" required>
-                  <option value="Passed" selected>Passed</option>
-                  <option value="Require As-Built Plan">Require As-Built Plan</option>
-                </select>
-              </label>
-
+            <select name="remarks" ng-model="formData.remarks" required>
+                <option value="Passed" selected>Passed</option>
+                <option value="Require As-Built Plan">Require As-Built Plan</option>
+            </select>
+        </label>
         <button type="submit" class="button button-block button-positive" ng-disabled="!electricalForm.$valid">Submit</button>
     </div>
-  </form>
-  </ion-content>
+</form>
+</ion-content>
 </ion-view>
-        

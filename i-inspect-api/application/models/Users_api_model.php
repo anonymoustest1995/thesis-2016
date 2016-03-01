@@ -23,14 +23,15 @@ class Users_api_model extends CI_Model {
         $this->db->where('user_id', $data['user_id']);
         $this->db->update('tbl_users', $data);
     }
-    
-    
-    function getUsersCredential($username){
-      $query = $this->db->select('*')
-                        ->from('tbl_users')
-                        ->where('user_username', $username)
-                        ->get();
-      
-      return $query->row();
+
+    public function getUsersCredential ($username)
+    {
+        $query = $this->db->select('*')
+                          ->from('tbl_users')
+                          ->join('tbl_positions','tbl_users.user_position_link = tbl_positions.position_id','join')
+                          ->where('user_username', $username)
+                          ->get();
+
+        return $query->row();
     }
 }

@@ -26,6 +26,15 @@ class Users_model extends CI_Model
         return $query->result();
     }
 
+    public function checkid ($id)
+    {
+       $query = $this->db->select('*')
+                          ->from('tbl_users')
+                          ->where('user_id', $id)
+                          ->get();
+
+        return $query->result();
+    }
 
     /*
     * Insert User Data to Database
@@ -77,10 +86,13 @@ class Users_model extends CI_Model
     */
     public function get_users_credential ($username)
     {
-        $query = $this->db->limit(1)
+        $query = $this->db->select('*')
+                          ->from('tbl_users')
+                          ->join('tbl_positions','tbl_users.user_position_link = tbl_positions.position_id','join')
                           ->where('user_username', $username)
-                          ->get('tbl_users');
-        
+                          ->limit(1)
+                          ->get();
+
         return $query->row();
     }
 
@@ -91,6 +103,7 @@ class Users_model extends CI_Model
     public function get_user_position(){
         $query = $this->db->select('*')
                           ->from('tbl_positions')
+                          ->where('position_description !=', 'Super Admin')
                           ->get();
 
         return $query->result();
@@ -133,6 +146,8 @@ class Users_model extends CI_Model
     {
         $query = $this->db->select('*')
                           ->from('tbl_users')
+                          ->join('tbl_positions', 'tbl_positions.position_id = tbl_users.user_position_link')
+                          ->where('position_description !=', 'Super Admin')
                           ->order_by('user_id', 'desc')
                           ->get();
 

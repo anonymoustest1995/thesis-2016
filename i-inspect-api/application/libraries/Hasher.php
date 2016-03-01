@@ -36,8 +36,10 @@ class Hasher {
 					                    'user_username' => $user->user_username,
 					                    'user_firstname'=> $user->user_firstname,
 					                    'user_lastname' => $user->user_lastname,
+					                    'user_middlename'=> $user->user_middlename,
+					                    'user_gender' 	=> $user->user_gender,
 					                    'user_email' 	=> $user->user_email,
-					                    'user_position' => $user->user_position_link,
+					                    'user_position' => $user->position_description,
 					                    'is_logged_in' 	=> true,
                 						)
                 					);

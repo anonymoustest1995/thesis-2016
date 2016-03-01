@@ -4,28 +4,15 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
      <h1>
-        Assign Inspection
+        Assign Inspection for Occpancy
         <small>Control panel</small>
       </h1>
-      <ul class="nav nav-tabs" style="margin-top:20px;">
-        <li class="active">
-            <a href="assign">For Occupancy Inspection</a>
-          </li>
-          <li>
-            <a href="assign-annual">For Annual Inspection</a>
-          </li>
-          <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Inspection Assigned Details<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="assign-details">Occupancy Assigned Inspectors</a></li>
-              <li><a href="assign-details-annual">Annual Assigned Inspectors</a></li>
-            </ul>
-          </li>
-      </ul>
     </section>
-
     <!-- Main content -->
     <section class="content">
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <i class="glyphicon glyphicon-info-sign"></i>  <strong>Select a Building Permit Number or Customer to Assign.</strong>
+      </div>
       <!-- Main row -->
       <div class="row">
             <div class="box">

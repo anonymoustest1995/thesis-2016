@@ -19,6 +19,7 @@ class Users_api extends REST_Controller {
 
         $this->load->library('Hasher');
         $this->load->model('users_api_model');
+         $this->load->model('users_model');
     }
 
     public function index_options(){
@@ -27,7 +28,6 @@ class Users_api extends REST_Controller {
     
     public function index_get()
     {   
-        
         $this->load->model('Users_api_model','tbl_users');
         $data = $this->tbl_users->get_all();
         $this->response($data, 200);
@@ -70,9 +70,33 @@ class Users_api extends REST_Controller {
 
     }   
 
-    public function index_delete()
+    public function change_password_post()
     {
+        $id = $this->post('user_id');
 
+        $checkuser = $this->users_model->checkid($id);
+
+        $pass = $this->post('user_password', TRUE);
+        $pwd = $this->hasher->createHash($pass);
+        $hashed_password = $pwd;
+        
+        $data = array(
+                    'user_id' => $this->post('user_id'),
+                    'user_username'     => $this->post('user_username', TRUE),
+                    'user_email'        => $this->post('user_email', TRUE),
+                   'user_position_link' => $this->post('user_position_link', TRUE),
+                    'user_lastname'     => ucfirst($this->post('user_lastname', TRUE)),
+                    'user_firstname'    => ucfirst($this->post('user_firstname', TRUE)),
+                    'user_middlename'   => ucfirst($this->post('user_middlename', TRUE)),
+                    'user_gender'       => $this->post('user_gender', TRUE),
+                    'user_password'     => $hashed_password,
+        );
+        
+        $this->db->where('user_id', $id);
+        $this->db->update('tbl_users', $data);
+
+        $x = array("data" => $data);
+        $this->response($x);
         
     }
 

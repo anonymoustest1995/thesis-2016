@@ -89,11 +89,12 @@ angular.module('starter.controllers', [])
     $scope.logout = function() {
       $scope.formData = $rootScope.userData;
       
-      $http.post('http://192.168.8.100/i-inspect-api/Users_api/logout', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Users_api/logout', $scope.formData).
         then(function(reply) {
           console.log(reply);
           $location.path("/login");
           $window.location.reload(true);
+
         }, function(response) {
           console.log(response);
         });
@@ -102,7 +103,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('HomeController', function($scope, $rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeController', function($scope, $rootScope,$ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -125,7 +126,6 @@ angular.module('starter.controllers', [])
 
     // Set Ink
     ionicMaterialInk.displayEffect();
-
 })
 
 
@@ -156,7 +156,7 @@ angular.module('starter.controllers', [])
     // Start showing the progress
     $scope.show($ionicLoading);
 
-    $http.post("http://192.168.8.100/i-inspect-api/Users_api/login",$scope.formData)
+    $http.post("http://192.168.1.13/i-inspect-api/Users_api/login",$scope.formData)
      .success( function (reply) {
       console.log(reply['status']);
           if (reply['status']) {
@@ -166,17 +166,18 @@ angular.module('starter.controllers', [])
             console.log($scope.username);
             console.log($rootScope.userData);
             $scope.formData = "";
-                  if ($rootScope.userData.user_position_link=="Architectural Inspector") { 
+                  if ($rootScope.userData.position_description=="Architectural Inspector") {
+
                         $location.path("/architectural/home");
-                      } else if ($rootScope.userData.user_position_link=="Structural Inspector") {
+                      } else if ($rootScope.userData.position_description=="Structural Inspector") {
                         $location.path("/structural/home");
-                      } else if ($rootScope.userData.user_position_link=="Mechanical Inspector") {
+                      } else if ($rootScope.userData.position_description=="Mechanical Inspector") {
                         $location.path("/mechanical/home");
-                      } else if ($rootScope.userData.user_position_link=="Sanitary or Plumbing Inspector") {
+                      } else if ($rootScope.userData.position_description=="Sanitary or Plumbing Inspector") {
                         $location.path("/plumbing-sanitary/home");
-                      } else if ($rootScope.userData.user_position_link=="Electrical Inspector") {
+                      } else if ($rootScope.userData.position_description=="Electrical Inspector") {
                         $location.path("/electrical/home");
-                      } else if ($rootScope.userData.user_position_link=="Electronics Inspector") {
+                      } else if ($rootScope.userData.position_description=="Electronics Inspector") {
                         $location.path("/electronics/home");
                       } else {
                         $location.path("/others/home");
@@ -206,7 +207,7 @@ angular.module('starter.controllers', [])
 /* Profile Controller
 ==================================*/
 
-.controller('ProfileController', function($scope, $rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('ProfileController', function($scope, $rootScope, $ionicPopup, $http, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicSideMenuDelegate, $ionicModal) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -240,6 +241,79 @@ angular.module('starter.controllers', [])
     $scope.middlename = $rootScope.userData.user_middlename;
     $scope.gender = $rootScope.userData.user_gender;
     $scope.email = $rootScope.userData.user_email;
+
+
+    $ionicModal.fromTemplateUrl('templates/change-password.html', {
+        animation: 'slide-in-up',
+        scope: $scope
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+  
+    $scope.openMenu = function () {
+        $ionicSideMenuDelegate.toggleLeft();
+    }
+  
+    $scope.openModal = function () {
+        $scope.modal.show();
+    }
+
+    $scope.hide = function () {
+        $scope.modal.hide();
+    }
+
+     $scope.openForm = function() {
+       var confirmPopup = $ionicPopup.confirm({
+         title: 'Change Password Alert !',
+         template: 'Are you sure you want to Change your Password ?'
+       });
+
+       confirmPopup.then(function(res) {
+         if(res) {
+             $scope.modal.show();
+         } else {
+              $scope.formData = "";
+         }
+       });
+     };
+
+    $scope.formData = {};
+    $scope.change_password = [];
+    $scope.formData.user_id = $rootScope.userData.user_id;
+    console.log($scope.formData.id)
+    $scope.formData.user_username = $rootScope.userData.user_username;
+    console.log($scope.formData.user_username)
+    $scope.formData.user_position_link = $rootScope.userData.user_position_link;
+    console.log($scope.formData.user_position_link)
+    $scope.formData.user_lastname = $rootScope.userData.user_lastname;
+    console.log($scope.formData.user_lastname)
+    $scope.formData.user_firstname = $rootScope.userData.user_firstname;
+    console.log($scope.formData.user_firstname)
+    $scope.formData.user_middlename = $rootScope.userData.user_middlename;
+    console.log($scope.formData.user_middlename)
+    $scope.formData.user_gender = $rootScope.userData.user_gender;
+    console.log($scope.formData.user_gender)
+    $scope.formData.user_email = $rootScope.userData.user_email;
+    console.log($scope.formData.user_email)
+
+    $scope.changePassword = function(changeForm){
+      $http.post('http://192.168.1.13/i-inspect-api/Users_api/change_password', $scope.formData).
+        then(function(response) {
+          console.log(response);
+          $scope.formData.user_id = response.data.user_id;
+          $scope.change_password.push($scope.formData);
+           var alertPopup = $ionicPopup.alert({
+                  title: 'Password Change Confirmation',
+                  template: 'Password Successfully Change!'
+                });
+                alertPopup.then(function(res) {
+                  $scope.modal.hide();
+                });
+
+        }, function(response) {
+          console.log(response);
+        });
+  }
 
 })
 
@@ -338,26 +412,28 @@ angular.module('starter.controllers', [])
 
 /* 1. Electronics Form Controller
 ==================================*/
-.controller('ElectronicsFormController', function($scope, $rootScope, $stateParams, $ionicPopup, $http, $state, AssignFormService) {
+.controller('ElectronicsFormController', function($scope, $rootScope, $stateParams,$timeout, $ionicPopup, $http, $state, AssignFormService) {
     $scope.formData = {};
-  
-    $scope.installation_operation_description = [
-    'Telecommunication System',
-    'Broadcasting System',
-    'Television System',
-    'Information Technology System',
-    'Security and Alarm',
-    'Electronics Fire Alarm',
-    'Sound Communication System',
-    'Centralized Clock System',
-    'Sound System',
-    'Electronics Control and Conveyor System',
-    'Building Automation System',
-  ];
-  
-  $scope.formData = {
-    installation_operation_description: ['formData']
-  };
+
+  $http.get('http://192.168.1.13/i-inspect-api/Get_area/electronics_area').
+        then(function(reply) {
+        console.log(reply);
+         $scope.roles = reply.data;
+          $scope.user = {
+            roles: [$scope.roles[0]]
+          };
+          $scope.checkAll = function() {
+            $scope.user.roles = angular.copy($scope.roles);
+          };
+          $scope.uncheckAll = function() {
+            $scope.user.roles = [];
+          }
+      }, function(response) {
+      console.log(response);
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
 
   $scope.formData.scope_of_work = "Occupancy Inspection";
   $scope.formData.inspection_type = "Electronics Inspection";
@@ -366,44 +442,53 @@ angular.module('starter.controllers', [])
     .$promise.then(function(oneCust) {
       $scope.electronics = [oneCust];
       $scope.formData.assigned_id_link = oneCust.assigned_id;
-      console.log($scope.formData.assigned_id_link); 
     });
 
 
 
   // save data to electronics field
  $scope.addElectronicsReport = function(electronicsForm){
-    if($scope.formData.inspection_id){
-      $scope.formData = "";
-    }
-    else{
-      var dataLength = $scope.installation_operation_description.length;
-      console.log(dataLength);
-      var newData = ""
-      for (var i = 0; i < dataLength; i++) {
-        newData = $scope.installation_operation_description[i]+", "+newData;
-      };
 
-      $scope.formData.installation_operation_description = newData;
-      console.log($scope.formData.installation_operation_description);
-
-      $http.post('http://192.168.8.100/i-inspect-api/Electronics', $scope.formData).
-        then(function(response) {
-          console.log(response);
-          $scope.formData.inspection_id = response.data.inspection_id;
-          $scope.electronics.push($scope.formData);
-           var alertPopup = $ionicPopup.alert({
-                  title: 'Adding Confirmation',
-                  template: 'Successfully Submitted!'
-                });
-                alertPopup.then(function(res) {
-                  $state.go("electronics.occupancy");
-                });
-
-        }, function(response) {
-          console.log(response);
+    var confirmPopup = $ionicPopup.confirm({
+       title: 'Are you sure you want to Send your Inspection Report ?',
+       template: 'Note: Once submitted, you can no longer edit your report!'
         });
-    }
+
+     confirmPopup.then(function(res) {
+       if(res) {
+          var dataLength = $scope.user.roles.length;
+          console.log(dataLength);
+          var newData = ""
+          for (var i = 0; i < dataLength; i++) {
+            newData = $scope.user.roles[i].area_description+", "+newData;
+          };
+
+          $scope.formData.installation_operation_description = newData;
+          console.log($scope.formData.installation_operation_description);
+
+          $http.post('http://192.168.1.13/i-inspect-api/Electronics', $scope.formData).
+            then(function(response) {
+              console.log(response);
+              $scope.formData.inspection_id = response.data.inspection_id;
+              $scope.electronics.push($scope.formData);
+              $scope.formData = {};
+              $scope.user.roles = {};
+              $state.go($state.current, {}, {reload: true});
+               var alertPopup = $ionicPopup.alert({
+                      title: 'Adding Confirmation',
+                      template: 'Successfully Submitted!'
+                    });
+                    alertPopup.then(function(res) {
+                      $state.go('electronics.occupancy', {}, {reload: true});
+                    });
+
+            }, function(response) {
+              console.log(response);
+            });
+       } else {
+          
+       }
+      });
   }
 
 
@@ -434,7 +519,7 @@ angular.module('starter.controllers', [])
       $scope.formData = "";
     }
     else{
-      $http.post('http://192.168.8.100/i-inspect-api/Architectural', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Architectural', $scope.formData).
         then(function(response) {
           console.log(response);
           $scope.formData.architectural_id = response.data.architectural_id;
@@ -477,7 +562,7 @@ angular.module('starter.controllers', [])
       $scope.formData = "";
     }
     else{
-      $http.post('http://192.168.8.100/i-inspect-api/Electrical', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Electrical', $scope.formData).
         then(function(response) {
           console.log(response);
           $scope.electrical.push($scope.formData);
@@ -502,30 +587,24 @@ angular.module('starter.controllers', [])
 .controller('MechanicalFormController', function($scope, $stateParams, $rootScope, $ionicPopup, $http, $state, AssignFormService) {
   $scope.formData = {};
   
- $scope.mechanical_installation_operation_description = [
-    'Boiler' ,
-    'Pressure Vessel' ,
-    'Internal Combustion Engine' ,
-    'Refrigeration and Ice Making' ,
-    'Window Type Airconditioning' ,
-    'Package or Split Type Airconditioning' ,
-    'Central Airconditioning' ,
-    'Mechanical Ventilation' ,
-    'Escalator' ,
-    'Moving Sidewalk' ,
-    'Freight Elevator' ,
-    'Passenger Elevator' ,
-    'Cable Car' ,
-    'Dumb Waiter' ,
-    'Pumps' ,
-    'Compressed Air, Vacuum or Industrial Gas' ,
-    'Pneumatic Tubes' ,
-    'Funicular' ,
-  ];
-  
-  $scope.formData = {
-    mechanical_installation_operation_description: ['formData']
-  };
+  $http.get('http://192.168.1.13/i-inspect-api/Get_area/mechanical_area').
+        then(function(reply) {
+        console.log(reply);
+         $scope.roles = reply.data;
+          $scope.user = {
+            roles: [$scope.roles[0]]
+          };
+          $scope.checkAll = function() {
+            $scope.user.roles = angular.copy($scope.roles);
+          };
+          $scope.uncheckAll = function() {
+            $scope.user.roles = [];
+          }
+      }, function(response) {
+      console.log(response);
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
 
   $scope.formData.scope_of_work = "Occupancy Inspection";
   $scope.formData.inspection_type = "Mechanical Inspection";
@@ -537,23 +616,22 @@ angular.module('starter.controllers', [])
       console.log($scope.formData.assigned_id_link); 
     });
 
-
  $scope.addMechanicalReport = function(mechanicalForm){
     if($scope.formData.inspection_id){
       $scope.formData = "";
     }
     else{
-      var dataLength = $scope.mechanical_installation_operation_description.length;
+      var dataLength = $scope.user.roles.length;
       console.log(dataLength);
       var newData = ""
       for (var i = 0; i < dataLength; i++) {
-        newData = $scope.mechanical_installation_operation_description[i]+", "+newData;
+        newData = $scope.user.roles[i].area_description+", "+newData;
       };
 
       $scope.formData.mechanical_installation_operation_description = newData;
       console.log($scope.formData.mechanical_installation_operation_description);
 
-      $http.post('http://192.168.8.100/i-inspect-api/Mechanical', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Mechanical', $scope.formData).
         then(function(response) {
           console.log(response);
           $scope.formData.inspection_id = response.data.inspection_id;
@@ -595,7 +673,7 @@ angular.module('starter.controllers', [])
       $scope.formData = "";
     }
     else{
-      $http.post('http://192.168.8.100/i-inspect-api/Plumbing_sanitary', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Plumbing_sanitary', $scope.formData).
         then(function(response) {
           console.log(response);
           $scope.formData.plumbing_or_sanitary_id = response.data.plumbing_or_sanitary_id;
@@ -636,7 +714,7 @@ angular.module('starter.controllers', [])
       $scope.formData = "";
     }
     else{
-      $http.post('http://192.168.8.100/i-inspect-api/Structural', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Structural', $scope.formData).
         then(function(response) {
           console.log(response);
           $scope.formData.structural_id = response.data.structural_id;
@@ -678,7 +756,7 @@ angular.module('starter.controllers', [])
       $scope.formData = "";
     }
     else{
-      $http.post('http://192.168.8.100/i-inspect-api/Others', $scope.formData).
+      $http.post('http://192.168.1.13/i-inspect-api/Others', $scope.formData).
         then(function(response) {
           console.log(response);
           $scope.formData.inspection_id = response.data.inspection_id;

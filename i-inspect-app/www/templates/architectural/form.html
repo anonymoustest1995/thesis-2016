@@ -1,86 +1,72 @@
-
 <ion-view view-title="Architectural Inspection">
 <ion-content class="padding">
-  <!-- Architectural Form -->
-    <form role="form" name="architecturalForm" ng-submit="addArchitecturalReport(architecturalForm)">
-
-     <div class="list" ng-repeat="x in architectural">
-        <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
-          <span class="item">{{x.building_permit_number}}</span>
-        <div class="item item-divider"><strong>Customer Name</strong></div> 
-          <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
-            
-            <input type="hidden" ng-model="formData.inspection_id">
-            <input type="hidden" ng-model="formData.assigned_id_link">
-          
-          <div class="item item-divider"><strong>Inspection Type</strong> <span class="asterisk">*</span></div>
-            <div class="item">
-                <input type="text" name="inspection_type" ng-model="formData.inspection_type"/>
-            </div>
-
-
-          <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
-            <div class="item">
-                <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
-            </div>
-            <!-- show an error if field is empty -->
-            <span class="asterisk" ng-show="architecturalForm.scope_of_work.$error.required && architecturalForm.scope_of_work.$dirty" class="asterisk">
-            Please fill in the required field.</span>
-
-          <div class="item item-divider"><strong>Least Floor to Selling Height (m)</strong> <span class="asterisk">*</span></div>
-            <div class="item">
-                <input type="number" name="least_floor_to_celling"  ng-model="formData.least_floor_to_celling" required>
-            </div>
-            <!-- show an error if field is empty -->
-              <span class="asterisk" ng-show="architecturalForm.least_floor_to_celling.$error.required && architecturalForm.least_floor_to_celling.$dirty" class="asterisk">
-                Please fill in the required field.</span>
-
-          <div class="item item-divider"><strong>Estimated Ventilation (% of wall) </strong> <span class="asterisk">*</span></div>
-            <div class="item">
-                <input type="number" name="estimated_ventilation"  ng-model="formData.estimated_ventilation" required>
-            </div>
-
-            <!-- show an error if field is empty -->
-            <span class="asterisk" ng-show="architecturalForm.estimated_ventilation.$error.required && architecturalForm.estimated_ventilation.$dirty" class="asterisk">
-                Please fill in the required field.</span>
-
-          <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
-            <div class="item">
-              <span>(Please write "none" if not applicable)</span>
-              <input type="text" name="others" ng-model="formData.others" required/>
-            </div>
-
-
-          <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
-            <div class="item">
-              <span>&#8369;</span>
-                <input type="number" step="any"  ng-model="formData.payment" required>
-            </div>
-            <!-- show an error if field is empty -->
-            <span class="asterisk" ng-show="architecturalForm.payment.$error.required && architecturalForm.payment.$dirty" class="asterisk">
-                Please fill in the required field.</span>
-            <span class="asterisk" ng-show="architecturalForm.payment.$error.number">
-                Not valid Amount!</span>
-
-            <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
-                <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
-            <!-- show an error if Feedbacks or Observations field is empty -->
-                <span class="asterisk" ng-show="architecturalForm.feedbacks.$error.required && architecturalForm.feedbacks.$dirty" class="asterisk">
-                Please fill in the required field.</span>
-
-               <label class="item item-input item-select">
-                <div class="input-label">
-                  <strong>Remarks</strong>&nbsp;<span class="asterisk">*</span>
-                </div>
-                <select name="architectural_remarks" ng-model="formData.remarks" required>
-                  <option value="Passed" selected>Passed</option>
-                  <option value="Require As-Built Plan">Require As-Built Plan</option>
-                </select>
-              </label>
-
-        <button type="submit" class="button button-block button-positive" ng-disabled="!architecturalForm.$valid">Submit</button>
+<!-- Architectural Form -->
+<form role="form" name="architecturalForm" ng-submit="addArchitecturalReport(architecturalForm)">
+  <div class="list" ng-repeat="x in architectural">
+    <div class="item item-divider"><strong>BUILDING PERMIT NUMBER</strong></div>
+    <span class="item">{{x.building_permit_number}}</span>
+    <div class="item item-divider"><strong>Customer Name</strong></div>
+    <span class="item"> {{x.customer_lastname}}, {{x.customer_firstname}} {{x.customer_middlename}} </span>
+    
+    <input type="hidden" ng-model="formData.inspection_id">
+    <input type="hidden" ng-model="formData.assigned_id_link">
+    
+    <div class="item item-divider"><strong>Inspection Type</strong> <span class="asterisk">*</span></div>
+    <div class="item">
+      <input type="text" name="inspection_type" ng-model="formData.inspection_type"/>
     </div>
-  </form>
-  </ion-content>
+    <div class="item item-divider"><strong>Scope of Work</strong> <span class="asterisk">*</span></div>
+    <div class="item">
+      <input type="text" name="scope_of_work" ng-model="formData.scope_of_work" required/>
+    </div>
+    <!-- show an error if field is empty -->
+    <span class="asterisk" ng-show="architecturalForm.scope_of_work.$error.required && architecturalForm.scope_of_work.$dirty" class="asterisk">
+    Please fill in the required field.</span>
+    <div class="item item-divider"><strong>Least Floor to Selling Height (m)</strong> <span class="asterisk">*</span></div>
+    <div class="item">
+      <input type="number" name="least_floor_to_celling"  ng-model="formData.least_floor_to_celling" required>
+    </div>
+    <!-- show an error if field is empty -->
+    <span class="asterisk" ng-show="architecturalForm.least_floor_to_celling.$error.required && architecturalForm.least_floor_to_celling.$dirty" class="asterisk">
+    Please fill in the required field.</span>
+    <div class="item item-divider"><strong>Estimated Ventilation (% of wall) </strong> <span class="asterisk">*</span></div>
+    <div class="item">
+      <input type="number" name="estimated_ventilation"  ng-model="formData.estimated_ventilation" required>
+    </div>
+    <!-- show an error if field is empty -->
+    <span class="asterisk" ng-show="architecturalForm.estimated_ventilation.$error.required && architecturalForm.estimated_ventilation.$dirty" class="asterisk">
+    Please fill in the required field.</span>
+    <div class="item item-divider"><strong>Others <span class="asterisk">*</span></strong></div>
+    <div class="item">
+      <span>(Please write "none" if not applicable)</span>
+      <input type="text" name="others" ng-model="formData.others" required/>
+    </div>
+    <div class="item item-divider"><strong>Payment</strong> <span class="asterisk">*</span></div>
+    <div class="item">
+      <span>&#8369;</span>
+      <input type="number" step="any"  ng-model="formData.payment" required>
+    </div>
+    <!-- show an error if field is empty -->
+    <span class="asterisk" ng-show="architecturalForm.payment.$error.required && architecturalForm.payment.$dirty" class="asterisk">
+    Please fill in the required field.</span>
+    <span class="asterisk" ng-show="architecturalForm.payment.$error.number">
+    Not valid Amount!</span>
+    <div class="item item-divider"><strong>Feedbacks / Observations</strong> <span class="asterisk">*</span></div>
+    <textarea type="text" class="item" name="feedbacks" ng-model="formData.feedbacks" required></textarea>
+    <!-- show an error if Feedbacks or Observations field is empty -->
+    <span class="asterisk" ng-show="architecturalForm.feedbacks.$error.required && architecturalForm.feedbacks.$dirty" class="asterisk">
+    Please fill in the required field.</span>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        <strong>Remarks</strong>&nbsp;<span class="asterisk">*</span>
+      </div>
+      <select name="architectural_remarks" ng-model="formData.remarks" required>
+        <option value="Passed" selected>Passed</option>
+        <option value="Require As-Built Plan">Require As-Built Plan</option>
+      </select>
+    </label>
+    <button type="submit" class="button button-block button-positive" ng-disabled="!architecturalForm.$valid">Submit</button>
+  </div>
+</form>
+</ion-content>
 </ion-view>
-        

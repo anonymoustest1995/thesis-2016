@@ -121,13 +121,13 @@
                 <img src="../assets/bower_components/AdminLTE/dist/img/avatar04.png" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('user_firstname'); ?> <?php echo $this->session->userdata('user_lastname'); ?> - Administrator
+                  <?php echo $this->session->userdata('user_firstname'); ?> <?php echo $this->session->userdata('user_lastname'); ?> - <?php echo $this->session->userdata('user_position'); ?>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="profile" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url('logout'); ?>" class="btn btn-default btn-flat">Logout</a>
@@ -154,7 +154,7 @@
         </div>
         <div class="pull-left info">
           <p> <?php echo $this->session->userdata('user_firstname'); ?> <?php echo $this->session->userdata('user_lastname'); ?> </p>
-          <span>Administrator</span>
+          <span> <?php echo $this->session->userdata('user_position'); ?> </span>
         </div>
       </div>
       <!-- search form -->
@@ -176,43 +176,29 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview">
-          <a href="assign">
-            <i class="glyphicon glyphicon-hand-right"></i> <span>Assign Inspection</span>
+        <li>
+          <a href="inspection-areas">
+            <i class="fa fa-list-alt"></i> <span>Inspection Areas</span>
           </a>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Lists</span>
+            <i class="fa fa-calendar-check-o"></i> <span>Assign Inspection</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="assign"><i class="fa fa-circle-o"></i>For Occupancy Inspection</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>For Annual Inspection</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list-ol"></i> <span>Lists</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="users-lists"><i class="fa fa-circle-o"></i>Lists of Users</a></li>
             <li><a href="reports"><i class="fa fa-circle-o"></i>Lists of Reports</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-           <!--  <small class="label pull-right bg-red">3</small> -->
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <!-- <small class="label pull-right bg-yellow">12</small> -->
-          </a>
-        </li>
-        <li class="treeview">
-           <a href="#">
-            <i class="fa fa-table"></i> <span>Layout Options</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
       </ul>

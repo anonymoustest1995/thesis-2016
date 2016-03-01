@@ -1,5 +1,5 @@
 
-<ion-view>
+<ion-view view-title="Login">
     <ion-content style="background: url(img/login.jpg) center; background-size: cover;">
         <div class="hero no-header flat">
             <div class="content">
@@ -8,7 +8,6 @@
             </div>
         </div>
     <form name="signinForm" novalidate="" ng-submit="signIn(formData.user_username, formData.user_password)">
-
         <div class="list">
             <ion-md-input placeholder="Username" highlight-color="balanced" name="username" ng-model="formData.user_username" required></ion-md-input>
             <ion-md-input placeholder="Password" highlight-color="energized" type="password" name="password" id="password" ng-model="formData.user_password" required></ion-md-input>

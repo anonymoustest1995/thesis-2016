@@ -212,6 +212,9 @@ span#_label-2 {color: #000 !important;}
 }
 
 
+.popup-container .popup {width: 98% !important;}
+.bar .button {min-height: 0 !important;min-width: 98px !important;max-width: 98px !important;max-height: 44px !important;width: 98px !important;}
+
 
 
 

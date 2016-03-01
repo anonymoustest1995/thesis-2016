@@ -88,7 +88,7 @@
                     <?php endforeach; ?>
 
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary" id="save-user-update-info">Update</button>
+                        <button type="button" class="btn btn-primary"    <button type="button" class="btn btn-primary" id="save-user-update-info">Update</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" onClick="reload()">Close</button>
                     </div>
                 </form>

@@ -71,7 +71,7 @@
                         <label for="user_position">Position</label>
                             <select class="form-control"  id="user_position" name="user_position">
                             <?php foreach ($userposition as $p) : ?>
-                                <option value="<?php echo $p->position_description; ?>"><?php echo $p->position_description; ?></option>
+                                <option value="<?php echo $p->position_id; ?>"><?php echo $p->position_description; ?></option>
                             <?php endforeach; ?> 
                             </select>
                     </div>
@@ -103,34 +103,6 @@
       </div>
     </div>
 
-
-    <!-- Add Position Modal -->
-    <div class="modal fade" id="addPositionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Position</h4>
-          </div>
-          <div class="modal-body">
-                <form id="create-position-form" method="post">
-                    
-                    <div class="form-group">
-                        <label for="position_description">Description</label>
-                            <input type="text" name="position_description" class="form-control" id="position_description" placeholder="Description"/>
-                            <span style="color: red;" id="err_position_description"></span>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" id="save-position-info">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onClick="reload()">Close</button>
-                    </div>
-                </form>                  
-            </div>
-        </div>
-      </div>
-    </div>
-
-
     <!-- Main content -->
     <section class="content">
       <!-- Main row -->
@@ -138,14 +110,12 @@
           <div class="box">
             <div class="box-header">
                 <a href="#" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp; Add User</a>
-                <a href="#" data-toggle="modal" data-target="#addPositionModal" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Position</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                      <th>User ID</th>
                       <th>Username</th>
                       <th>Lastname</th>
                       <th>Firstname</th>
@@ -160,12 +130,11 @@
                     <?php foreach ($data as $person) : ?>
                         <tr>
                         <input type="hidden" name="user_id" value="<?php echo $person->user_id; ?>">
-                            <td><?php echo $person->user_id; ?></td>
                             <td><?php echo $person->user_username;?></td>
                             <td><?php echo $person->user_lastname;?></td>
                             <td><?php echo $person->user_firstname;?></td>
                             <td><?php echo $person->user_middlename;?></td>
-                            <td><?php echo $person->user_position_link;?></td>
+                            <td><?php echo $person->position_description;?></td>
                             <td><?php echo $person->user_gender;?></td>
                             <td><?php echo $person->user_email; ?></td>
                             <td><a href="<?php echo base_url() . "Users/delete_user/" . $person->user_id; ?>" onClick="return doconfirm()" class="link fa fa-trash-o" title="Delete"></a>

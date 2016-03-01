@@ -8,22 +8,38 @@
             </div>
         </div>
         <div class="list animate-fade-slide-in-right">
-            <div class="item item-divider">
-                Basic Information
-            </div>
+            <div class="card">
+                <div class="item item-divider" style="text-transform: uppercase;">
+                    Basic Information
+                </div>
 
-            <a class="item item-icon-left" href="#">
-                <i class="icon ion-ios-person"></i>
-                   Username: {{username}}
-            </a>
-            <a class="item item-icon-left" href="#">
-                <i class="icon ion-male"></i>
-                   Gender: {{gender}}
-            </a>
-            <a class="item item-icon-left" href="#">
-                <i class="icon ion-email"></i>
-                   Email: {{email}}
-            </a>
+                <div class="item item-divider">
+                    Username:
+                </div>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-ios-person"></i>
+                    {{username}}
+                </a>
+                <div class="item item-divider">
+                    Gender: 
+                </div>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-male"></i>
+                    {{gender}}
+                </a>
+                <div class="item item-divider">
+                    Email:
+                </div>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-email"></i>
+                    {{email}}
+                </a>
+                <div class="item">
+                    <button class="button button-block button-assertive" ng-click="openForm()">
+                        Change Password
+                    </button>
+                </div>
+            </div>
         </div>
     </ion-content>
 </ion-view>
